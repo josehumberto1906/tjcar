@@ -1,0 +1,11 @@
+{
+  "name": "TJ Car - Gestão da Oficina",
+  "short_name": "TJ Car",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f1ec",
+  "theme_color": "#1f2328",
+  "icons": [
+    { "src": "/static/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
