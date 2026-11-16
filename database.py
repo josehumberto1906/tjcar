@@ -1,9 +1,30 @@
 """Acesso ao banco SQLite do TJ Car."""
+import os
 import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
 
+
+def caminho_padrao() -> Path:
+    """Arquivo do banco: variável TJCAR_DB ou tjcar.db ao lado do código."""
+    return Path(os.environ.get("TJCAR_DB") or Path(__file__).parent / "tjcar.db")
+
+
 ESQUEMA = """
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    usuario TEXT NOT NULL UNIQUE COLLATE NOCASE,
+    senha_hash TEXT NOT NULL,
+    criado_em TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS login_falhas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    chave TEXT NOT NULL,
+    momento REAL NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_login_falhas ON login_falhas (chave, momento);
+
 CREATE TABLE IF NOT EXISTS clientes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,

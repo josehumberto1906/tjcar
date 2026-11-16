@@ -34,6 +34,10 @@ async function api(metodo, url, corpo) {
   if (resp.status === 204) return null;
   let dados = null;
   try { dados = await resp.json(); } catch { /* resposta sem corpo */ }
+  if (resp.status === 401) {  // sessão expirou ou senha foi trocada
+    location.href = "/login";
+    throw new Error("Sessão expirada. Faça login novamente.");
+  }
   if (!resp.ok) throw new Error((dados && dados.erro) || "Algo deu errado. Tente novamente.");
   return dados;
 }
@@ -598,6 +602,17 @@ async function rotear() {
   }
 }
 
+async function montarConta() {
+  const { usuario } = await api("GET", "/api/eu");
+  $("#conta").innerHTML =
+    `<span>${esc(usuario)}</span><button class="link" id="sair" type="button">Sair</button>`;
+  $("#sair").onclick = async () => {
+    try { await api("POST", "/api/logout"); } catch { /* já saiu */ }
+    location.href = "/login";
+  };
+}
+
 montarMenu();
+montarConta().catch(() => { /* 401 já redireciona para o login */ });
 window.addEventListener("hashchange", rotear);
 rotear();

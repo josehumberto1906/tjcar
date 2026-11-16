@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1f2328">
+  <title>Entrar · TJ Car</title>
+  <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="pagina-login">
+  <main class="login-cartao">
+    <div class="login-marca">
+      <img src="/static/icon.svg" alt="" width="56" height="56">
+      <h1>TJ Car</h1>
+      <p>Gestão da oficina</p>
+    </div>
+
+    <form id="form-login" novalidate>
+      <div id="login-erro" class="erro-caixa" role="alert" hidden></div>
+      <label class="campo">
+        <span>Usuário</span>
+        <input name="usuario" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required autofocus>
+      </label>
+      <label class="campo">
+        <span>Senha</span>
+        <input name="senha" type="password" autocomplete="current-password" required>
+      </label>
+      <button class="btn primario" id="entrar" type="submit">Entrar</button>
+    </form>
+  </main>
+  <script src="/static/login.js"></script>
+</body>
+</html>

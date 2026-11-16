@@ -17,6 +17,10 @@ class ErroNegocio(Exception):
     """Operação não permitida pelas regras da oficina."""
 
 
+class ErroBloqueado(Exception):
+    """Muitas tentativas de login erradas."""
+
+
 # ---------- helpers de validação ----------
 
 def _texto(d: dict, campo: str, rotulo: str, obrigatorio=False, maximo=120) -> str:

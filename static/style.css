@@ -51,6 +51,22 @@ body {
 
 h1, h2, h3 { margin: 0; line-height: 1.2; }
 
+/* ---------- login ---------- */
+.pagina-login { display: grid; place-items: center; min-height: 100vh; padding: 20px; background: var(--menu); }
+.login-cartao { width: min(400px, 100%); background: var(--painel); border-radius: 16px; padding: 32px 28px; box-shadow: 0 20px 60px rgba(0, 0, 0, .35); }
+.login-marca { text-align: center; margin-bottom: 24px; }
+.login-marca img { border-radius: 14px; }
+.login-marca h1 { font-size: 26px; margin-top: 10px; }
+.login-marca p { margin: 2px 0 0; color: var(--suave); }
+#form-login { display: grid; gap: 16px; }
+#form-login .btn { width: 100%; min-height: 46px; font-size: 16px; }
+#form-login input { min-height: 46px; font-size: 16px; }
+
+/* ---------- conta (usuário logado) ---------- */
+.conta { display: flex; justify-content: flex-end; align-items: center; gap: 10px; font-size: 13px; color: var(--suave); margin: -8px 0 10px; min-height: 20px; }
+.link { background: none; border: 0; padding: 4px 2px; font: inherit; font-weight: 600; color: var(--destaque-escuro); cursor: pointer; text-decoration: underline; }
+.link:hover { color: var(--destaque); }
+
 /* ---------- layout ---------- */
 .app { display: grid; grid-template-columns: 232px 1fr; min-height: 100%; }
 
@@ -223,12 +239,12 @@ dialog::backdrop { background: rgba(10, 12, 14, .55); }
   td.num, td.acoes { text-align: right; }
   td.acoes { justify-content: flex-end; padding-top: 8px; }
   td.acoes::before { content: none; }
-  td[data-principal] { font-weight: 700; font-size: 16px; }
+  td[data-principal] { display: block; text-align: left; font-weight: 700; font-size: 16px; }
   td[data-principal]::before { content: none; }
 }
 
 @media print {
-  .menu, .topo-acoes, .acoes-status, .form-linha, .btn, .filtros, .aviso, .nao-imprimir { display: none !important; }
+  .menu, .conta, .topo-acoes, .acoes-status, .form-linha, .btn, .filtros, .aviso, .nao-imprimir { display: none !important; }
   .app { display: block; }
   .conteudo { padding: 0; max-width: none; }
   body { background: #fff; color: #000; }

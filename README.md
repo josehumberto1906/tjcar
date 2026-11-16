@@ -13,6 +13,7 @@ Sistema web que funciona no computador e no celular (layout responsivo, instalá
 
 ```bash
 pip install -r requirements.txt
+python criar_usuario.py      # cria o seu usuário e senha (só na primeira vez)
 python app.py
 ```
 
@@ -33,7 +34,25 @@ database.py       conexão e criação das tabelas SQLite
 static/           frontend (index.html, style.css, app.js)
 ```
 
-## Observação de segurança
+## Login e usuários
 
-Esta versão não tem login: use apenas na rede da oficina. Para colocar na internet,
-adicione autenticação e HTTPS antes.
+Todas as telas e a API exigem login. Os usuários são gerenciados pelo terminal:
+
+```bash
+python criar_usuario.py                      # cria um usuário (pergunta nome e senha)
+python criar_usuario.py --trocar-senha ana   # troca a senha (desconecta quem estava logado)
+python criar_usuario.py --listar             # lista os usuários
+python criar_usuario.py --excluir ana        # exclui um usuário
+```
+
+- Senhas com no mínimo 8 caracteres, guardadas apenas como hash (nunca em texto).
+- Depois de 5 senhas erradas seguidas para o mesmo usuário, o login é bloqueado por 10 minutos.
+- A sessão dura 7 dias; o botão "Sair" encerra na hora.
+- A chave que assina a sessão fica em `tjcar.key` (criada sozinha, não vai para o GitHub).
+
+## Colocando na internet
+
+1. **Use sempre https** (PythonAnywhere, Render etc. já fornecem) e defina `TJCAR_HTTPS=1`
+   no ambiente, para o cookie de sessão só trafegar criptografado.
+2. Crie o usuário no servidor com `python criar_usuario.py` (no console do serviço).
+3. Faça backup do arquivo `tjcar.db` com frequência.
